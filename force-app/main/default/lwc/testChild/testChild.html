@@ -1,0 +1,31 @@
+<template>  
+  <template if:true={record}>
+
+    
+    <template if:true={eligible}>
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <lightning-icon size="small" class="copy-icon" icon-name="utility:copy" alternative-text="Warning!" title="copy"></lightning-icon>
+        <textarea class="record-input edit-target" onblur={handleUpdate} oninput={adjustArea} data-field={info.field} readonly>{value}</textarea>
+      </div>
+    </template>
+    
+    <template if:true={picklist}>
+      <!-- validationでclass名が必要 -->
+      <!-- 選択肢が変更された際に更新関数を発火させる -->
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <label class="select-label">
+          <select class="edit-target" onchange={handleUpdate}>
+            <template for:each={options} for:item="option" for:index="index">
+              <!-- classはレンダリング後に選択されているoptionを特定するのに使う -->
+              <option class="select-option" value={option} key={option}>{option}</option>
+            </template>
+          </select>
+        </label>
+      </div>
+    </template>
+    
+    
+  </template>
+</template>

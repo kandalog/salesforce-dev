@@ -1,0 +1,19 @@
+<template>
+  <c-white-card>
+    <main>
+      <div class="inner">
+        <div class="title__contents">
+          <lightning-icon size="small" icon-name={iconName}></lightning-icon>
+          <h2 class="titel">{title}</h2>
+        </div>
+        <template if:true={asynchronous}>
+          <template for:each={calCount} for:item="count" for:index="index">
+            <div key={count}>
+              <c-custom-action-form number={index} info={info}></c-custom-action-form>
+            </div>
+          </template>
+        </template>
+      </div>
+    </main>
+  </c-white-card>
+</template>

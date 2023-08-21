@@ -1,0 +1,158 @@
+.inner {
+  padding: 20px 20px;
+}
+
+.title__contents {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.titel {
+  font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+main {
+  margin-top: 15px;
+}
+
+/* div */
+.input-row {
+  margin-top: 10px;
+  position: relative;
+}
+
+.input-row.fullfilled::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 1.8em;
+  right: 20px;
+  width: 10px;
+  height: 5px;
+  border-left: 3px solid #31CA46;
+  border-bottom: 3px solid #31CA46;
+  transform: rotate(-45deg);
+}
+
+.input-row.fullfilled:hover::after {
+  display: none;
+}
+
+.copy-icon {
+  display: none;
+  cursor: pointer;
+}
+
+.input-row.fullfilled:hover .copy-icon {
+  position: absolute;
+  top: 0.8em;
+  right: 1em;
+  display: block;
+}
+
+
+/* label */
+.inpute-label {
+  font-size: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* input */
+.record-input {
+  display: block;
+  padding: 5px;
+  resize: none;
+  height: 30px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.record-input.fullfilled {
+  border-bottom: 1px solid #31CA46;
+}
+
+.record-input::selection {
+  background-color: transparent;
+}
+
+.record-input.active::selection {
+  background-color: #a0c8f0;
+}
+
+.record-input.active:focus {
+  box-shadow: 0px 0px 5px 3px #ddd;
+  border-radius: 5px;
+  border: none;
+}
+
+.record-input:focus{
+  outline: none;
+}
+
+/* SELECT */
+.select-label {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.select-label::after {
+  position: absolute;
+  right: 15px;
+  width: 10px;
+  height: 7px;
+  background-color: #535353;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  pointer-events: none;
+}
+
+.select-label select {
+  appearance: none;
+  min-width: 230px;
+  height: 2.8em;
+  padding: .4em calc(.8em + 30px) .4em .8em;
+  border: none;
+  border-bottom: 1px solid #31CA46;
+  background-color: #fff;
+  color: #333333;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.select-label select:focus {
+  outline: none;
+}
+
+
+/* multipcklistのスタイル */
+.multi-checkbox {
+  display: none;
+  font-weight: bold;
+}
+
+.checkbox-parts {
+  background-color: #E5E5E5;
+  color: #838288;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.multi-checkbox:checked + .checkbox-parts {
+  background-color: #363636;
+  color: #fff;
+}

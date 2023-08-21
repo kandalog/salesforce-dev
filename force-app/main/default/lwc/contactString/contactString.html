@@ -1,0 +1,10 @@
+<template>
+  <c-white-card>
+
+    <template if:true={record}>
+      <textarea class="record-input edit-target" onblur={handleUpdate} >{value}</textarea>
+
+    </template>
+    
+  </c-white-card>
+</template>

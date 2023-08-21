@@ -1,0 +1,9 @@
+<template>
+  <c-white-card>
+  
+      <template if:true={record}>
+        <input type="date" value={value} class="edit-target" onchange={handleUpdate}>
+      </template>
+    
+  </c-white-card>
+</template>

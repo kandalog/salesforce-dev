@@ -1,0 +1,53 @@
+<template>  
+  <template if:true={record}>
+
+    <template if:true={isString}>
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <lightning-icon size="small" class="copy-icon" icon-name="utility:copy" alternative-text="Warning!" title="copy"></lightning-icon>
+        <textarea class="record-input edit-target" onblur={handleUpdate} oninput={adjustArea} data-field={info.field} readonly>{value}</textarea>
+      </div>
+    </template>
+    
+    <template if:true={isDate}>
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <input type="date" value={value} class="edit-target" onchange={handleUpdate}>
+      </div>
+    </template>
+
+    <template if:true={isPicklist}>
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <label class="select-label">
+          <select class="edit-target" onchange={handleUpdate}>
+            <template for:each={options} for:item="option" for:index="index">
+              <option class="select-option" value={option} key={option}>{option}</option>
+            </template>
+          </select>
+        </label>
+      </div>
+    </template> 
+    
+    <template if:true={isBoolean}>
+      <div class="input-row">
+        <p class="inpute-label">{info.label}</p>
+        <input type="checkbox" onchange={handleUpdate} class="edit-target" checked={value}>
+      </div>
+    </template>
+
+    
+    <template if:true={isMultiPicklist}>
+      <div class="input-row">
+        <template for:each={options} for:item="option" for:index="index">
+          <label key={option}>
+            <input type="checkbox" onchange={handleUpdate} class="multi-checkbox edit-target" value={option}>
+            <span class="checkbox-parts">{option}</span>
+          </label>
+        </template>
+      </div>
+    </template>
+    
+    
+  </template>
+</template>
