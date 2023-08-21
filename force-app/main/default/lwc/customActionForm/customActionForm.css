@@ -132,27 +132,39 @@ main {
 
 
 /* multipcklistのスタイル */
-.multi-checkbox {
+.multi-checkbox__container {
+  /* multiselectboxの横幅を指定 */
+  width: 200px;
+}
+
+.multi-checkbox-toggle-button {
+  cursor: pointer;
+  width: inherit;
+  border: 1px solid #ccc;
+  background-color: transparent;
+}
+
+/* 以下選択肢本体 */
+
+.multi-checkbox__inner {
   display: none;
-  font-weight: bold;
+  overflow: auto;
+  /* scrollさせずに表示できる範囲を指定 */
+  height: 125px;
+
+  &.active {
+    display: block;
+  }
+}
+
+.multi-checkbox-label {
+  display: block;
+  width: inherit;
+  border: 1px solid #ccc;
+  border-top: none;
+  cursor: pointer;
 }
 
 .checkbox-parts {
-  background-color: #E5E5E5;
-  color: #838288;
-  font-weight: bold;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  padding: 0 20px;
-  border-radius: 3px;
-  border: none;
-  cursor: pointer;
-  margin-left: 20px;
-}
-
-.multi-checkbox:checked + .checkbox-parts {
-  background-color: #363636;
-  color: #fff;
+  user-select: none;
 }

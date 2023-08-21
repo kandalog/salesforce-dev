@@ -36,15 +36,21 @@
       </div>
     </template>
 
-    
+
     <template if:true={isMultiPicklist}>
       <div class="input-row">
-        <template for:each={options} for:item="option" for:index="index">
-          <label key={option}>
-            <input type="checkbox" onchange={handleUpdate} class="multi-checkbox edit-target" value={option}>
-            <span class="checkbox-parts">{option}</span>
-          </label>
-        </template>
+        <p class="inpute-label">{info.label}</p>
+        <div class="multi-checkbox__container">
+          <button class="multi-checkbox-toggle-button">選択してください</button>
+          <div class="multi-checkbox__inner">
+            <template for:each={options} for:item="option" for:index="index">
+              <label key={option} class="multi-checkbox-label">
+                <input type="checkbox" onchange={handleUpdate} class="multi-checkbox edit-target" value={option}>
+                <span class="checkbox-parts">{option}</span>
+              </label>
+            </template>
+          </div>
+        </div>
       </div>
     </template>
     

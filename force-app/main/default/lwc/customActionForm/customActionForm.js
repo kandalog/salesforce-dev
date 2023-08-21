@@ -77,12 +77,26 @@ export default class CustomActionForm extends LightningElement {
     }
 
     if(this.isMultiPicklist){
+
+      // マルチセレクトのモーダル機能を実装
+      const multiCheckboxToggleButton = this.template.querySelector('.multi-checkbox-toggle-button')
+      multiCheckboxToggleButton.addEventListener('click',(e) => {
+        e.target.nextElementSibling.classList.toggle('active')
+      })
+
+      // 選択済みのoptionをcheckedにする + 選択済み項目をボタンに挿入
+      let currentSelected = "";
       const options = this.template.querySelectorAll('.multi-checkbox');
       options.forEach((option) => {
         if (this.record.fields[this.info.field].value.includes(option.value)) {
           option.checked = true;
+          currentSelected += `${option.value} `
         }
       })
+
+      if (currentSelected) {
+        multiCheckboxToggleButton.textContent = currentSelected;
+      }
     }
 
   }
