@@ -12,6 +12,8 @@
   padding: 5px;
   font-size: 16px;
   cursor: pointer;
+  z-index: 2;
+  top: 1px;
 }
 
 .tab-parts {
@@ -22,12 +24,12 @@
 }
 
 .button-tab:hover {
-  border-bottom: 1px solid #5555f1;
+  border-bottom: 2px solid #4094F9;
 }
 
 .button-tab.active {
   font-weight: bold;
-  border-bottom: 3px solid #6c6ce3;
+  border-bottom: 3px solid #4094F9;
 }
 
 .button-tab:not(:first-of-type) {
