@@ -21,13 +21,27 @@
           </template>
   
           <template if:true={isTab2}>
-
+            <template for:each={calCount} for:item="count" for:index="index">
+              <div key={count}>
+                <c-custom-action-form number={index} info={info}></c-custom-action-form>
+              </div>
+            </template>
           </template>
   
           <template if:true={isTab3}>
+            <template for:each={calCount} for:item="count" for:index="index">
+              <div key={count}>
+                <c-custom-action-form number={index} info={info}></c-custom-action-form>
+              </div>
+            </template>
           </template>
   
           <template if:true={isTab4}>
+            <template for:each={calCount} for:item="count" for:index="index">
+              <div key={count}>
+                <c-custom-action-form number={index} info={info}></c-custom-action-form>
+              </div>
+            </template>
           </template>
         </template>
 

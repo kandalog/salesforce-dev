@@ -27,24 +27,66 @@ export default class Test extends LightningElement {
   @track allTabs;
   isFirst = false;
   
-  
   asynchronous;
 
 
   async connectedCallback() {
+    console.log("connectedCallback");
     // tab?を繰り返し処理でレンダリングするためtab?をまとめた配列を作成
     let allTabs = [];
     allTabs.push(this.tab1, this.tab2, this.tab3, this.tab4)
     allTabs = allTabs.filter((tab) => tab != undefined && tab != "")
     this.allTabs = allTabs;
 
-    // apexをcallし、info配列を作成する
-    const fields = this.stringToArray();
-    this.count = fields.length
+    await this.switchContents()
+  }
 
+
+  get calCount() {
+    const array = [];
+    for (let i = 0; i < this.count; i++) {
+      array.push(i);
+    }
+    return array;
+  }
+
+  renderedCallback() {
+    console.log("renderedCallback");
+    // 指数関数的にイベントが付与され、フリーズされるのを防ぐ
+    if (this.isFirst === false) {
+      const tabs = this.template.querySelectorAll('.button-tab');
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].addEventListener('click', () => {
+          this.asynchronous = false
+          this.switchCurrentTab(`tab${i+1}`)
+          this.switchContents();
+          // console.log(this.info[0].label);
+        })
+      }
+      this.isFirst = true;
+    }
+  }
+
+  // disconnectedCallback() {
+  //   console.log("呼び出し");
+  //   this.asynchronous = false
+  // }
+
+  // apexをcallし、info配列を作成する
+  async switchContents() {
+    const fields = this.stringToArray();
+    this.count = fields.length;
+    // console.log("fields", fields[0]);
+    // console.log("count", this.count);
+    
     const res = await getFieldMetaData({objectName: this.objectName, fields: fields});
+    // console.log("メタデータ", res);
+    // ここまではうまく動いている
+    // this.asynchronous = true
     this.asynchronous = true
 
+    // 下記がうまく動いていない
+    this.info = [];
     for (let i = 0; i < this.count; i++ ) {
       const data = {
         recordId: this.recordId,
@@ -56,27 +98,8 @@ export default class Test extends LightningElement {
       }
       this.info.push(data)
     }
-  }
 
-  get calCount() {
-    const array = [];
-    for (let i = 0; i < this.count; i++) {
-      array.push(i);
-    }
-    return array;
-  }
-
-  renderedCallback() {
-    // 指数関数的にイベントが付与され、フリーズされるのを防ぐ
-    if (this.isFirst === false) {
-      const tabs = this.template.querySelectorAll('.button-tab');
-      for (let i = 0; i < tabs.length; i++) {
-        tabs[i].addEventListener('click', () => {
-          this.switchCurrentTab(`tab${i+1}`)
-        })
-      }
-      this.isFirst = true;
-    }
+    console.log("op", this.info[0].field);
   }
 
   // 現在のisTab?をTrueに、他をfalseにする
