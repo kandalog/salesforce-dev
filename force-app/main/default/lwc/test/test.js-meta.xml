@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>test</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property type="String" name="objectName" label="オブジェクト名" required="true" default="" ></property>
+            <property type="String" name="tab1" label="タブ1" required="true" default=""></property>
+            <property type="String" name="fields1" label="項目名2(複数の場合は,区切り)" default=""></property>
+            <property type="String" name="tab2" label="タブ2" default=""></property>
+            <property type="String" name="fields2" label="項目名3(複数の場合は,区切り)" default=""></property>
+            <property type="String" name="tab3" label="タブ3" default=""></property>
+            <property type="String" name="fields3" label="項目名4(複数の場合は,区切り)" default=""></property>
+            <property type="String" name="tab4" label="タブ4" default=""></property>
+            <property type="String" name="fields4" label="項目名4(複数の場合は,区切り)" default=""></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

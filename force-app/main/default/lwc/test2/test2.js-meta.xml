@@ -6,9 +6,4 @@
     <targets>
         <target>lightning__RecordPage</target>
     </targets>
-	<targetConfigs>
-        <targetConfig targets="lightning__RecordPage">
-            <property name="role" type="String" label="role" required="true" default="free" ></property>
-        </targetConfig>
-	</targetConfigs>
 </LightningComponentBundle>
