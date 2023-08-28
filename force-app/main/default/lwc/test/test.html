@@ -4,49 +4,22 @@
       <!-- button -->
       <div class="button__container">
         <template for:each={allTabs} for:item="tab" for:index="index">
-          <button class="button-tab" key={tab}>{tab}</button>
+          <div class="button-tab" key={tab}>
+            <p>{tab}</p>
+            <span class="tab-parts"></span>
+          </div>
         </template>
       </div>
       <!-- main -->
       <div class="main-contents">
-
         <template if:true={asynchronous}>
-
-          <template if:true={isTab1}>
-            <template for:each={calCount} for:item="count" for:index="index">
-              <div key={count}>
-                <c-custom-action-form number={index} info={info}></c-custom-action-form>
-              </div>
-            </template>
-          </template>
-  
-          <template if:true={isTab2}>
-            <template for:each={calCount} for:item="count" for:index="index">
-              <div key={count}>
-                <c-custom-action-form number={index} info={info}></c-custom-action-form>
-              </div>
-            </template>
-          </template>
-  
-          <template if:true={isTab3}>
-            <template for:each={calCount} for:item="count" for:index="index">
-              <div key={count}>
-                <c-custom-action-form number={index} info={info}></c-custom-action-form>
-              </div>
-            </template>
-          </template>
-  
-          <template if:true={isTab4}>
-            <template for:each={calCount} for:item="count" for:index="index">
-              <div key={count}>
-                <c-custom-action-form number={index} info={info}></c-custom-action-form>
-              </div>
-            </template>
+          <template for:each={calCount} for:item="count" for:index="index">
+            <div key={count}>
+              <c-custom-action-form number={index} info={info}></c-custom-action-form>
+            </div>
           </template>
         </template>
-
       </div>
-
     </div>
   </c-white-card>
 </template>

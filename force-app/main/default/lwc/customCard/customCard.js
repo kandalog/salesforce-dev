@@ -18,7 +18,6 @@ export default class CustomCard extends LightningElement {
     this.count = fields.length
 
     const res = await getFieldMetaData({objectName: this.objectName, fields: fields});
-    // console.log("親 → 子", res)
     this.asynchronous = true  
     
     for (let i = 0; i < this.count; i++ ) {

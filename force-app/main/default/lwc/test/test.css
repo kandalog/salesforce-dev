@@ -1,3 +1,35 @@
 .inner {
   padding: 10px;
 }
+
+.button__container {
+  display: flex;
+  border-bottom: 1px solid #333;
+}
+
+.button-tab {
+  position: relative;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tab-parts {
+  position: absolute;
+  top: -8%;
+  right: -12%;
+  font-size: 12px;
+}
+
+.button-tab:hover {
+  border-bottom: 1px solid #5555f1;
+}
+
+.button-tab.active {
+  font-weight: bold;
+  border-bottom: 3px solid #6c6ce3;
+}
+
+.button-tab:not(:first-of-type) {
+  margin-left: 18px;
+}

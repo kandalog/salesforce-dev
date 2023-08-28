@@ -25,22 +25,24 @@ export default class Test extends LightningElement {
   isTab4 = false;
 
   @track allTabs;
+  @track itemCountList = [];
   isFirst = false;
   
   asynchronous;
 
 
-  async connectedCallback() {
+  connectedCallback() {
     console.log("connectedCallback");
-    // tab?を繰り返し処理でレンダリングするためtab?をまとめた配列を作成
-    let allTabs = [];
-    allTabs.push(this.tab1, this.tab2, this.tab3, this.tab4)
-    allTabs = allTabs.filter((tab) => tab != undefined && tab != "")
-    this.allTabs = allTabs;
-
-    await this.switchContents()
+    this.provideTabList();
+    this.switchContents();
+    this.insertItemCountListToProperty();
   }
 
+  renderedCallback() {
+    console.log("renderedCallback");    
+    this.addClickEventListener();
+    this.insertItemCountToSpan();
+  }
 
   get calCount() {
     const array = [];
@@ -50,43 +52,68 @@ export default class Test extends LightningElement {
     return array;
   }
 
-  renderedCallback() {
-    console.log("renderedCallback");
-    // 指数関数的にイベントが付与され、フリーズされるのを防ぐ
+  // 指数関数的にイベントが付与され、フリーズされるのを防ぐ
+  addClickEventListener() {
     if (this.isFirst === false) {
       const tabs = this.template.querySelectorAll('.button-tab');
+      tabs[0].classList.add('active');
+
       for (let i = 0; i < tabs.length; i++) {
-        tabs[i].addEventListener('click', () => {
+        tabs[i].addEventListener('click', (e) => {
           this.asynchronous = false
           this.switchCurrentTab(`tab${i+1}`)
           this.switchContents();
-          // console.log(this.info[0].label);
+          this.resetActiveTabs();
+          e.target.parentNode.classList.add("active")
         })
       }
       this.isFirst = true;
     }
   }
 
-  // disconnectedCallback() {
-  //   console.log("呼び出し");
-  //   this.asynchronous = false
-  // }
+  // tabのアイテム数の配列をプロパティに挿入
+  insertItemCountListToProperty() {
+    let itemCountList = []
+    itemCountList.push(this.fields1 ? this.fields1.split(",").length : 0);
+    itemCountList.push(this.fields2 ? this.fields2.split(",").length : 0);
+    itemCountList.push(this.fields3 ? this.fields3.split(",").length : 0);
+    itemCountList.push(this.fields4 ? this.fields4.split(",").length : 0);
+    this.itemCountList = itemCountList
+  }
 
-  // apexをcallし、info配列を作成する
+  // タブのアイテム数をspanタグに挿入
+  insertItemCountToSpan() {
+    const tabParts = this.template.querySelectorAll('.tab-parts');
+    for (let i = 0; i < tabParts.length; i++) {
+      tabParts[i].textContent = this.itemCountList[i];
+    }
+  }
+
+  // すべてのボタンからactiveを消す
+  resetActiveTabs() {
+    const tabs = this.template.querySelectorAll('.button-tab');
+    for (let i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove('active');
+    }
+  }
+
+  // すべてのタブを内包した配列を提供
+  provideTabList() {
+    let allTabs = [];
+    allTabs.push(this.tab1, this.tab2, this.tab3, this.tab4)
+    allTabs = allTabs.filter((tab) => tab != undefined && tab != "")
+    this.allTabs = allTabs;
+  }
+
+  // main-contentsの切り替え
   async switchContents() {
     const fields = this.stringToArray();
     this.count = fields.length;
-    // console.log("fields", fields[0]);
-    // console.log("count", this.count);
     
     const res = await getFieldMetaData({objectName: this.objectName, fields: fields});
-    // console.log("メタデータ", res);
-    // ここまではうまく動いている
-    // this.asynchronous = true
     this.asynchronous = true
 
-    // 下記がうまく動いていない
-    this.info = [];
+    let info = []
     for (let i = 0; i < this.count; i++ ) {
       const data = {
         recordId: this.recordId,
@@ -96,10 +123,9 @@ export default class Test extends LightningElement {
         type: res[i].type,
         picklistValues: res[i].picklistValues
       }
-      this.info.push(data)
+      info.push(data)
     }
-
-    console.log("op", this.info[0].field);
+    this.info = info
   }
 
   // 現在のisTab?をTrueに、他をfalseにする
